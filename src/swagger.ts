@@ -2,24 +2,13 @@ import { SwaggerOptions } from '@fastify/swagger';
 
 const swaggerOpts: SwaggerOptions = {
   routePrefix: '/doc',
-  swagger: {
+  openapi: {
     info: {
       title: 'Wallpaper changer api',
       description: 'api documentation',
       version: '0.1.0',
     },
-
-    host: 'localhost',
-    schemes: ['http'],
-    consumes: ['application/json'],
-    produces: ['application/json'],
-    securityDefinitions: {
-      jwt: {
-        type: 'apiKey',
-        name: 'Authorization',
-        in: 'header',
-      },
-    },
+    
   },
   uiConfig: {
     docExpansion: 'full',
