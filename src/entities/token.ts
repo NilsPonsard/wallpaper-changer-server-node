@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm';
 import { User } from './user';
 
 @Entity()
@@ -14,4 +14,7 @@ export class Token extends BaseEntity {
 
   @ManyToOne(() => User, user => user.tokens)
   user: User;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
