@@ -1,4 +1,13 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, ManyToMany, CreateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  ManyToOne,
+  ManyToMany,
+  CreateDateColumn,
+  JoinTable,
+} from 'typeorm';
 import { User } from './user';
 
 @Entity()
@@ -16,9 +25,11 @@ export class Wallpaper extends BaseEntity {
   postedBy: User;
 
   @ManyToMany(() => User, user => user.likedWallpapers)
+  @JoinTable()
   likedBy: User[];
 
   @ManyToMany(() => User, user => user.recievedWallpapers)
+  @JoinTable()
   postedTo: User[];
 
   @CreateDateColumn()

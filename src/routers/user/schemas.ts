@@ -6,3 +6,8 @@ export const tokenPairResponse = Type.Object({
 });
 
 export type tokenPairResponseType = Static<typeof tokenPairResponse>;
+export const userBody = Type.Object({
+  id: Type.Number(),
+  username: Type.String(),
+  description: Type.String(),
+});

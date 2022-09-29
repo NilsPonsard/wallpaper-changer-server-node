@@ -3,12 +3,9 @@ import { Static, Type } from '@sinclair/typebox';
 import { checkUser } from '../../jwt/check';
 import { AppDataSource } from '../../data-source';
 import { User } from '../../entities/user';
+import { userBody } from './schemas';
 
-const userBody = Type.Object({
-  id: Type.Number(),
-  username: Type.String(),
-  description: Type.String(),
-});
+
 
 const userParams = Type.Object({
   id: Type.Number(),
