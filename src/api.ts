@@ -4,8 +4,12 @@ import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import cors from '@fastify/cors';
 import swaggerOpts from './swagger';
 import UserRoutes from './routers/user';
+import WallpaperRoutes from './routers/wallpaper';
 
-const routers = [{ router: UserRoutes, prefix: '/user' }];
+const routers = [
+  { router: UserRoutes, prefix: '/user' },
+  { router: WallpaperRoutes, prefix: '/wallpaper' },
+];
 
 export async function serve() {
   const fastify = Fastify({

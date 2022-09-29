@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { AppDataSource } from './data-source';
-import {serve} from './api';
+import { serve } from './api';
 
 AppDataSource.initialize()
   .then(async () => {

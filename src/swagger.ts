@@ -16,13 +16,15 @@ const swaggerOpts: SwaggerOptions = {
           scheme: 'bearer',
           bearerFormat: 'JWT',
         },
+        clientToken: {
+          type: 'apiKey',
+          name: 'api-key',
+          in: 'header',
+        },
       },
     },
   },
-  uiConfig: {
-    docExpansion: 'full',
-    deepLinking: false,
-  },
+
   uiHooks: {
     onRequest: function (request, reply, next) {
       next();

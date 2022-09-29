@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, Index, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { FriendRequest } from './friendRequest';
 import { Token } from './token';
 import { Wallpaper } from './wallpaper';
@@ -20,8 +20,9 @@ export class User extends BaseEntity {
   @Column()
   description: string;
 
+  @Index()
   @Column({ nullable: true })
-  clientToken: string | null;
+  clientToken?: string;
 
   @OneToMany(() => Wallpaper, wallpaper => wallpaper.postedBy)
   postedWallpapers: Wallpaper[];

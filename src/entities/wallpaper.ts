@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, ManyToMany } from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, ManyToMany, CreateDateColumn } from 'typeorm';
 import { User } from './user';
 
 @Entity()
@@ -20,4 +20,7 @@ export class Wallpaper extends BaseEntity {
 
   @ManyToMany(() => User, user => user.recievedWallpapers)
   postedTo: User[];
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
