@@ -12,9 +12,9 @@ const swaggerOpts: SwaggerOptions = {
     components: {
       securitySchemes: {
         jwt: {
-          type: 'apiKey',
-          name: 'Athorization',
-          in: 'header',
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
         },
       },
     },

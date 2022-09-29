@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { loginHandler, loginOptions } from './login';
+import { meHandler, meOptions } from './me';
 import { registerHandler, registerOptions } from './register';
 
 /**
@@ -10,4 +11,5 @@ import { registerHandler, registerOptions } from './register';
 export default async function UserRoutes(fastify: FastifyInstance, _options: object) {
   fastify.post('/', registerOptions, registerHandler);
   fastify.post('/login', loginOptions, loginHandler);
+  fastify.get('/me', meOptions, meHandler);
 }
