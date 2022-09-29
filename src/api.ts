@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import fastifySwagger from '@fastify/swagger';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import cors from '@fastify/cors';
 import swaggerOpts from './swagger';
 import UserRoutes from './routers/user';
 
@@ -12,6 +13,7 @@ export async function serve() {
   }).withTypeProvider<TypeBoxTypeProvider>();
 
   await fastify.register(fastifySwagger, swaggerOpts);
+  await fastify.register(cors, { origin: '*' });
 
   await Promise.all(routers.map(({ router, prefix }) => fastify.register(router, { prefix })));
 
