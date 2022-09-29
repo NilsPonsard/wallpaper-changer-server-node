@@ -40,10 +40,12 @@ export async function addFriendHandler(request: FastifyRequest<{ Params: ParamsT
     return;
   }
 
+  console.log('checking if friend request already exists');
+
   const exists = await AppDataSource.getRepository(FriendRequest)
-    .createQueryBuilder('friendRequest')
-    .where('friendRequest.fromUser = :fromUser', { fromUser: user.id })
-    .andWhere('friendRequest.toUser = :toUser', { toUser: targetUser.id })
+    .createQueryBuilder('friend_request')
+    .where('friend_request.from = :fromUser', { fromUser: user.id })
+    .andWhere('friend_request.to = :toUser', { toUser: targetUser.id })
     .getOne();
 
   if (exists) {
@@ -51,10 +53,12 @@ export async function addFriendHandler(request: FastifyRequest<{ Params: ParamsT
     return;
   }
 
+  console.log('checking if friend request already exists, inverse');
+
   const reverse = await AppDataSource.getRepository(FriendRequest)
-    .createQueryBuilder('friendRequest')
-    .where('friendRequest.from = :fromUser', { fromUser: targetUser.id })
-    .andWhere('friendRequest.to = :toUser', { toUser: user.id })
+    .createQueryBuilder('friend_request')
+    .where('friend_request.from = :fromUser', { fromUser: targetUser.id })
+    .andWhere('friend_request.to = :toUser', { toUser: user.id })
     .getOne();
 
   if (reverse) {
@@ -68,5 +72,5 @@ export async function addFriendHandler(request: FastifyRequest<{ Params: ParamsT
     friendRequest.save();
   }
 
-  reply.status(201).send({ message: 'ok' });
+  reply.status(200).send({ message: 'ok' });
 }
