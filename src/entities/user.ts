@@ -20,8 +20,8 @@ export class User extends BaseEntity {
   @Column()
   description: string;
 
-  @Column()
-  clientToken?: string;
+  @Column({ nullable: true })
+  clientToken: string | null;
 
   @OneToMany(() => Wallpaper, wallpaper => wallpaper.postedBy)
   postedWallpapers: Wallpaper[];

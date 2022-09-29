@@ -8,7 +8,16 @@ const swaggerOpts: SwaggerOptions = {
       description: 'api documentation',
       version: '0.1.0',
     },
-    
+    servers: [{ url: 'http://localhost:3000' }],
+    components: {
+      securitySchemes: {
+        jwt: {
+          type: 'apiKey',
+          name: 'Athorization',
+          in: 'header',
+        },
+      },
+    },
   },
   uiConfig: {
     docExpansion: 'full',
