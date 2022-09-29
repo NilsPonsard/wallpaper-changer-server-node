@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 import { Static, Type } from '@sinclair/typebox';
 import { checkUser } from '../../jwt/check';
 import { messageResponse } from '../common';
-import { userBody } from './schemas';
+import { userBody, userBodyType } from './schemas';
 import { User } from '../../entities/user';
 import { FriendRequestStatus } from '../../entities/friendRequest';
 
@@ -11,8 +11,6 @@ export const friendsResponse = Type.Object({
   requests: Type.Array(userBody),
   sent: Type.Array(userBody),
 });
-
-export type messageResponseType = Static<typeof messageResponse>;
 
 export const getFriendsOptions: RouteShorthandOptions = {
   schema: {
@@ -40,19 +38,19 @@ export async function getFriendsHandler(request: FastifyRequest, reply: FastifyR
     .where('user.id = :id', { id: user.id })
     .getOne();
 
-  const friends: Map<string, User> = new Map();
-  const requests: Map<string, User> = new Map();
-  const sent: Map<string, User> = new Map();
+  console.log(extended);
+
+  const friends: userBodyType[] = [];
+  const requests: userBodyType[] = [];
+  const sent: userBodyType[] = [];
 
   extended.sentFriendRequests.forEach(request => {
     switch (request.status) {
       case FriendRequestStatus.ACCEPTED:
-        friends[request.to.id] = request.to;
+        friends.push(request.to);
         break;
       case FriendRequestStatus.PENDING:
-        sent[request.to.id] = request.to;
-        break;
-      default:
+        sent.push(request.to);
         break;
     }
   });
@@ -60,19 +58,17 @@ export async function getFriendsHandler(request: FastifyRequest, reply: FastifyR
   extended.receivedFriendRequests.forEach(request => {
     switch (request.status) {
       case FriendRequestStatus.ACCEPTED:
-        friends[request.from.id] = request.from;
+        friends.push(request.from);
         break;
       case FriendRequestStatus.PENDING:
-        requests[request.from.id] = request.from;
-        break;
-      default:
+        requests.push(request.from);
         break;
     }
   });
 
   reply.status(200).send({
-    friends: Array.from(friends.values()),
-    requests: Array.from(requests.values()),
-    sent: Array.from(sent.values()),
+    friends: friends,
+    requests: requests,
+    sent: sent,
   });
 }
