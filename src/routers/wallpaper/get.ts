@@ -34,6 +34,7 @@ export async function getHandler(request: FastifyRequest, reply: FastifyReply) {
     .createQueryBuilder('user')
     .leftJoin('user.recievedWallpapers', 'wallpaper')
     .leftJoin('wallpaper.postedBy', 'postedBy')
+    .where('user.id = :id', { id: user.id })
     .orderBy('wallpaper.createdAt', 'DESC')
     .getOne();
 
