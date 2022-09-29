@@ -10,7 +10,8 @@
   ],
   "env": {
     "NODE_ENV": "development",
-    "DATABASE_URL": "postgresql://postgres:postgres@localhost/wall"
+    "DATABASE_URL": "postgresql://postgres:postgres@localhost/wall",
+    "JWT_SECRET": "secret"
   },
   "ext": "ts"
 }
