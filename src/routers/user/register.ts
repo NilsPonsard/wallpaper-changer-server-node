@@ -16,6 +16,7 @@ type BodyType = Static<typeof registerBody>;
 
 export const registerOptions: RouteShorthandOptions = {
   schema: {
+    tags: ['User'],
     description: 'Register a new user',
     body: registerBody,
     response: {

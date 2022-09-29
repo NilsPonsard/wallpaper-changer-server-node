@@ -14,6 +14,7 @@ type BodyType = Static<typeof loginBody>;
 
 export const loginOptions: RouteShorthandOptions = {
   schema: {
+    tags: ['User'],
     description: 'User login',
     body: loginBody,
     response: {

@@ -3,6 +3,7 @@ import { Type } from '@sinclair/typebox';
 import { checkUser } from '../../jwt/check';
 
 const userBody = Type.Object({
+  id: Type.Number(),
   username: Type.String(),
   email: Type.String(),
   description: Type.String(),
@@ -10,6 +11,7 @@ const userBody = Type.Object({
 
 export const meOptions: RouteShorthandOptions = {
   schema: {
+    tags: ['User'],
     security: [{ jwt: [] }],
     description: 'User me',
     response: {
@@ -27,6 +29,7 @@ export async function meHandler(request: FastifyRequest, reply: FastifyReply) {
   }
 
   reply.status(200).send({
+    id: user.id,
     username: user.username,
     email: user.email,
     description: user.description,
