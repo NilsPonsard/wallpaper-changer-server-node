@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { addFriendHandler, addFriendOptions } from './add_friend';
 import { clientPostHandler, clientPostOptions } from './client';
 import { getUserHandler, getUserOptions } from './get';
+import { getFriendsHandler, getFriendsOptions } from './get_friends';
 import { loginHandler, loginOptions } from './login';
 import { meHandler, meOptions } from './me';
 import { registerHandler, registerOptions } from './register';
@@ -18,4 +19,5 @@ export default async function UserRoutes(fastify: FastifyInstance, _options: obj
   fastify.post('/client', clientPostOptions, clientPostHandler);
   fastify.get('/:id', getUserOptions, getUserHandler);
   fastify.post('/friend/:username', addFriendOptions, addFriendHandler);
+  fastify.get('/friend', getFriendsOptions, getFriendsHandler);
 }

@@ -14,7 +14,7 @@ export const friendsResponse = Type.Object({
 
 export type messageResponseType = Static<typeof messageResponse>;
 
-export const addFriendOptions: RouteShorthandOptions = {
+export const getFriendsOptions: RouteShorthandOptions = {
   schema: {
     tags: ['User'],
     description: 'Get friends and friends requests',
@@ -25,7 +25,7 @@ export const addFriendOptions: RouteShorthandOptions = {
   },
 };
 
-export async function addFriendHandler(request: FastifyRequest, reply: FastifyReply) {
+export async function getFriendsHandler(request: FastifyRequest, reply: FastifyReply) {
   const user = await checkUser(request.headers.authorization);
   if (!user) {
     reply.status(401).send({ message: 'Unauthorized' });

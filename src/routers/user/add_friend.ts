@@ -19,7 +19,7 @@ export const addFriendOptions: RouteShorthandOptions = {
     security: [{ jwt: [] }],
     params,
     response: {
-      201: messageResponse,
+      200: messageResponse,
     },
   },
 };
