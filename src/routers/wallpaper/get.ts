@@ -32,13 +32,13 @@ export async function getHandler(request: FastifyRequest, reply: FastifyReply) {
 
   const result = await AppDataSource.getRepository(User)
     .createQueryBuilder('user')
-    .leftJoin('user.recievedWallpapers', 'wallpaper')
-    .leftJoin('wallpaper.postedBy', 'postedBy')
+    .leftJoinAndSelect('user.recievedWallpapers', 'wallpaper')
+    .leftJoinAndSelect('wallpaper.postedBy', 'postedBy')
     .where('user.id = :id', { id: user.id })
     .orderBy('wallpaper.createdAt', 'DESC')
     .getOne();
-
-  if (result.recievedWallpapers.length === 0) {
+    
+  if (!result.recievedWallpapers || result.recievedWallpapers.length === 0) {
     reply.status(404).send({ message: 'No wallpapers found' });
     return;
   }
