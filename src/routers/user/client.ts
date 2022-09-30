@@ -13,7 +13,7 @@ export const clientPostOptions: RouteShorthandOptions = {
     description: 'Generate a new client token for the user',
     security: [{ jwt: [] }],
     response: {
-      201: clientTokenResponse,
+      200: clientTokenResponse,
     },
   },
 };
@@ -25,5 +25,5 @@ export async function clientPostHandler(request: FastifyRequest, reply: FastifyR
     return;
   }
 
-  reply.status(201).send({ token: await newClientTokenForUser(user) });
+  reply.status(200).send({ token: await newClientTokenForUser(user) });
 }
