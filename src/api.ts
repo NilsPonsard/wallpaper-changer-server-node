@@ -21,5 +21,5 @@ export async function serve() {
 
   await Promise.all(routers.map(({ router, prefix }) => fastify.register(router, { prefix })));
 
-  await fastify.listen({ port: 3000 });
+  await fastify.listen({ port: 3000, host:"0.0.0.0" });
 }

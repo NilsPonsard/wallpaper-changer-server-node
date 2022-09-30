@@ -10,4 +10,6 @@ RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+ENV NODE_ENV=production
+
+CMD [ "npm","run", "start:prod" ]
