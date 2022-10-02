@@ -27,3 +27,23 @@ export async function clientPostHandler(request: FastifyRequest, reply: FastifyR
 
   reply.status(200).send({ token: await newClientTokenForUser(user) });
 }
+
+export const clientGetOptions: RouteShorthandOptions = {
+  schema: {
+    tags: ['User', 'Client'],
+    description: 'Get client token of the user',
+    security: [{ jwt: [] }],
+    response: {
+      200: clientTokenResponse,
+    },
+  },
+};
+export async function clientGetHandler(request: FastifyRequest, reply: FastifyReply) {
+  const user = await checkUser(request.headers.authorization);
+  if (!user) {
+    reply.status(401).send({ message: 'Unauthorized' });
+    return;
+  }
+
+  reply.status(200).send({ token: user.clientToken || '' });
+}
