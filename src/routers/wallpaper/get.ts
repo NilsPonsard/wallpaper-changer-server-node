@@ -38,12 +38,12 @@ export async function getHandler(request: FastifyRequest, reply: FastifyReply) {
     .orderBy('wallpaper.createdAt', 'DESC')
     .getOne();
     
-  if (!result.recievedWallpapers || result.recievedWallpapers.length === 0) {
+  if (!result.receivedWallpapers || result.receivedWallpapers.length === 0) {
     reply.status(404).send({ message: 'No wallpapers found' });
     return;
   }
 
-  const wallpaper = result.recievedWallpapers[0];
+  const wallpaper = result.receivedWallpapers[0];
   if (!wallpaper) {
     reply.status(404).send({ message: 'No wallpapers found' });
     return;

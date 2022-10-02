@@ -32,7 +32,7 @@ export class User extends BaseEntity {
   likedWallpapers: Wallpaper[];
 
   @ManyToMany(() => Wallpaper, wallpaper => wallpaper.postedTo)
-  recievedWallpapers: Wallpaper[];
+  receivedWallpapers: Wallpaper[];
 
   @OneToMany(() => FriendRequest, friendRequest => friendRequest.from)
   sentFriendRequests: FriendRequest[];

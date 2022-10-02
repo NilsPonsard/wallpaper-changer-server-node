@@ -28,7 +28,7 @@ export class Wallpaper extends BaseEntity {
   @JoinTable()
   likedBy: User[];
 
-  @ManyToMany(() => User, user => user.recievedWallpapers)
+  @ManyToMany(() => User, user => user.receivedWallpapers)
   @JoinTable()
   postedTo: User[];
 
