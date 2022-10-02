@@ -1,8 +1,9 @@
-import { BaseEntity, Column, Entity, Index, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, Index, ManyToMany, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { FriendRequest } from './friendRequest';
 import { Token } from './token';
 import { Wallpaper } from './wallpaper';
 
+@Unique("UQ_Username", ["username"])
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
