@@ -57,6 +57,8 @@ export async function wallpaperHistoryHandler(request: FastifyRequest, reply: Fa
     .leftJoinAndSelect('postedWallpapers.postedTo', 'target')
     .leftJoinAndSelect('receivedwallpapers.postedBy', 'from')
     .leftJoinAndSelect('postedWallpapers.likedBy', 'likedby')
+    .orderBy('postedWallpapers.createdAt', 'DESC')
+    .addOrderBy('receivedwallpapers.createdAt', 'DESC')
     .where('user.id = :id', { id: user.id })
     .getOne();
 
